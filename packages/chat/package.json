@@ -1,0 +1,32 @@
+{
+  "name": "chat",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@wllama/wllama": "^2.3.6",
+    "preact": "^10.27.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@preact/preset-vite": "^2.10.2",
+    "@types/node": "^24.6.0",
+    "eslint": "^9.39.0",
+    "eslint-config-preact": "^2.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.4.0",
+    "prettier": "^3.6.2",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.2",
+    "vite": "npm:rolldown-vite@7.1.14"
+  },
+  "overrides": {
+    "vite": "npm:rolldown-vite@7.1.14"
+  }
+}
