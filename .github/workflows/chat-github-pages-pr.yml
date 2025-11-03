@@ -1,0 +1,66 @@
+# PR preview workflow for deploying static content to GitHub Pages
+
+name: Deploy PR preview to Pages
+
+on:
+  # Runs on pull requests targeting the default branch, but only for changes in packages/chat
+  pull_request:
+    branches: ['master']
+    paths:
+      - 'packages/chat/**'
+      - '.github/workflows/ci.yml'
+
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment per PR
+concurrency:
+  group: 'pages-pr-${{ github.event.pull_request.number }}'
+  cancel-in-progress: true
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    # Skip for draft PRs
+    if: ${{ github.event.pull_request.draft == false }}
+    environment:
+      name: github-pages-pr
+      url: ${{ steps.deployment.outputs.page_url }}.__${{ github.event.pull_request.number }}__
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: |
+          cd packages/chat
+          npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          # Upload dist folder from packages/chat
+          path: './packages/chat/dist'
+
+      - name: Deploy PR preview to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          preview: true
+
+
