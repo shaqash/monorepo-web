@@ -15,7 +15,7 @@ export function Main() {
 
   return (
     <>
-      {downloadProgress < 100 && (
+      {downloadProgress.value < 100 && (
         <div style={{
           position: 'fixed',
           top: '12px',

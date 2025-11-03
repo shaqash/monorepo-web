@@ -46,7 +46,7 @@ jobs:
       - name: Build
         run: |
           cd packages/chat
-          npm run build
+          npm run build -- --base /monorepo-web/.__${{ github.event.pull_request.number }}__/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
