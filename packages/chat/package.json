@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@preact/signals": "^2.3.2",
     "@wllama/wllama": "^2.3.6",
     "preact": "^10.27.2"
   },

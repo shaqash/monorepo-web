@@ -1,27 +1,30 @@
 import { useCallback, useRef, useState } from "preact/hooks";
-import { DEFAULT_INFERENCE_PARAMS } from "../config";
+import { DEFAULT_INFERENCE_PARAMS, MODELS } from "../config";
 import { useWllama } from "./wllama.context";
 
 const controller = new AbortController();
 
 export const useCompletion = () => {
-  const { wllama } = useWllama();
+  const { wllama, messages, currentModel } = useWllama();
   const [isLoading, setLoading] = useState(false);
-  const [output, setOutput] = useState<string | undefined>(undefined);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [output, setOutput] = useState<string | undefined>('');
   const signalRef = useRef(controller.signal);
 
   const abort = useCallback(() => controller.abort(), []);
 
-  const complete = async (prompt: string) => {
+  const complete = async () => {
     try {
       setLoading(true);
-      console.log(prompt);
+      setIsProcessing(true);
       const outputText = await wllama
-        .createCompletion(`You are a helpful assistant. ${prompt}`, {
+        .createChatCompletion(messages.value, {
           ...DEFAULT_INFERENCE_PARAMS,
+          ...(MODELS[currentModel.value].sampling ?? {}),
           stream: false,
           abortSignal: signalRef.current,
           onNewToken(_token, _piece, currentText) {
+            setIsProcessing(false);
             setOutput(currentText);
           },
         });
@@ -32,5 +35,5 @@ export const useCompletion = () => {
     }
   }
 
-  return { complete, output, abort, isLoading };
+  return { complete, output, abort, isLoading, isProcessing };
 }

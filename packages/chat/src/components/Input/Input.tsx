@@ -2,12 +2,15 @@ import './Input.css';
 import { useRef, useEffect, type FC } from "preact/compat";
 import { useCompletion } from '../../utils/useCompletion';
 import { useMessages } from '../../utils/useMessages';
+import { useWllama } from '../../utils/wllama.context';
+import { MODELS } from '../../config';
 
 export const Input: FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { messages, pushAssistant, pushUser } = useMessages();
-  const { complete, output, abort, isLoading } = useCompletion();
+  const { complete, output, abort, isLoading, isProcessing } = useCompletion();
+  const { currentModel } = useWllama();
 
   useEffect(() => {
     if (output && output.trim()) {
@@ -27,7 +30,7 @@ export const Input: FC = () => {
 
     inputRef.current!.value = '';
 
-    await complete(inputValue);
+    await complete();
 
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -42,16 +45,23 @@ export const Input: FC = () => {
   return (
     <div className="chat-container">
       <div className="messages-area">
-        {messages.length === 0 ? (
-          <h1 class="welcome-message">Ask anything.</h1>
+        {messages.value.length === 0 ? (
+          <h1 class="welcome-message">{MODELS[currentModel.value].displayName}</h1>
         ) : (
           <div className="messages-list">
-            {messages.map((message, index) => (
+            {messages.value.map((message, index) => (
               <div key={index} className={`message message-${message.role}`}>
-                <div className="message-content">{message.content}</div>
+                <div className="message-content">
+                  {message.role === 'assistant' && (
+                    <div class="message-title">
+                      {MODELS[currentModel.value].displayName}
+                    </div>
+                  )}
+                  {message.content}
+                </div>
               </div>
             ))}
-            {isLoading && !output && (
+            {isProcessing && (
               <div className="message message-assistant">
                 <div className="message-content typing-indicator">
                   <span />
@@ -70,7 +80,7 @@ export const Input: FC = () => {
           <input
             ref={inputRef}
             type="text"
-            placeholder="Who was marco polo?"
+            placeholder="Ask anything."
             onKeyDown={handleKeyDown}
             disabled={isLoading}
             className="chat-input"

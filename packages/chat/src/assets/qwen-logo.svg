@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <!-- Gradient for light purple/white top surfaces -->
+    <linearGradient id="lightGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5EDFF;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#E8D5FF;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#B794F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9F7AEA;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradient for darker purple bottom surfaces -->
+    <linearGradient id="darkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7C3AED;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6B46C1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4C1D95;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradient for medium purple side surfaces -->
+    <linearGradient id="midGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C4B5FD;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A78BFA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Radial gradient for depth -->
+    <radialGradient id="depthGradient" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#B794F6;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#6B46C1;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background (transparent by default, uncomment for dark bg) -->
+  <!-- <rect width="200" height="200" fill="#1a1a1a"/> -->
+  
+  <!-- Transform origin at center -->
+  <g transform="translate(100, 100)">
+    
+    <!-- Segment 3: Bottom-right pointing (goes under segment 2, appears lowest) -->
+    <g transform="rotate(240)">
+      <path d="M -35,-20.2 L -17.5,-35 L 35,-20.2 L 35,20.2 L 17.5,35 L -17.5,20.2 Z" 
+            fill="url(#darkGradient)"/>
+      <!-- Bottom shadow edge -->
+      <path d="M 17.5,35 L -17.5,20.2 L -35,-20.2" 
+            fill="none" 
+            stroke="#4C1D95" 
+            stroke-width="1.5" 
+            stroke-linejoin="round"
+            opacity="0.6"/>
+    </g>
+    
+    <!-- Segment 2: Bottom-left pointing (goes under segment 1, over segment 3) -->
+    <g transform="rotate(120)">
+      <path d="M -35,-20.2 L -17.5,-35 L 35,-20.2 L 35,20.2 L 17.5,35 L -17.5,20.2 Z" 
+            fill="url(#midGradient)"/>
+      <!-- Top highlight edge -->
+      <path d="M -35,-20.2 L -17.5,-35 L 35,-20.2" 
+            fill="none" 
+            stroke="#E8D5FF" 
+            stroke-width="1.8" 
+            stroke-linejoin="round"
+            opacity="0.8"/>
+      <!-- Bottom shadow edge -->
+      <path d="M 17.5,35 L -17.5,20.2 L -35,-20.2" 
+            fill="none" 
+            stroke="#553C9A" 
+            stroke-width="1.2" 
+            stroke-linejoin="round"
+            opacity="0.5"/>
+    </g>
+    
+    <!-- Segment 1: Top-right pointing (appears on top) -->
+    <g transform="rotate(0)">
+      <path d="M -35,-20.2 L -17.5,-35 L 35,-20.2 L 35,20.2 L 17.5,35 L -17.5,20.2 Z" 
+            fill="url(#lightGradient)"/>
+      <!-- Bright top edge highlight -->
+      <path d="M -35,-20.2 L -17.5,-35 L 35,-20.2" 
+            fill="none" 
+            stroke="#FFFFFF" 
+            stroke-width="2" 
+            stroke-linejoin="round"
+            opacity="0.9"/>
+      <!-- Subtle side highlight -->
+      <path d="M 35,-20.2 L 35,20.2 L 17.5,35" 
+            fill="none" 
+            stroke="#D8B4FE" 
+            stroke-width="1.2" 
+            stroke-linejoin="round"
+            opacity="0.7"/>
+    </g>
+    
+    <!-- Central triangular void -->
+    <polygon points="-10.1,-17.5 -10.1,17.5 20.2,0" 
+             fill="#000000" 
+             opacity="0.95"/>
+    
+    <!-- Inner depth lines for 3D effect -->
+    <g opacity="0.4" stroke="#8B5CF6" stroke-width="0.8">
+      <line x1="-17.5" y1="-35" x2="-10.1" y2="-17.5" stroke-linecap="round"/>
+      <line x1="35" y1="-20.2" x2="20.2" y2="0" stroke-linecap="round"/>
+      <line x1="17.5" y1="35" x2="20.2" y2="0" stroke-linecap="round"/>
+    </g>
+    
+  </g>
+</svg>
+
