@@ -7,8 +7,9 @@ import { useWllama } from './wllama.context';
 import { computed } from '@preact/signals';
 import type { CompletionChunk } from '@wllama/wllama';
 
+
 export const useChatCompletion = () => {
-  const { wllama, messages, currentSampling } = useWllama();
+  const { wllama, messages } = useWllama();
   const key = computed(() => messages.value.reduce((acc, cur) => cur.role === 'user' ? acc + 1 : acc, 0));
 
   return useQuery({
@@ -22,12 +23,11 @@ export const useChatCompletion = () => {
       streamFn: ({ signal }) => wllama
         .createChatCompletion(messages.value, {
           ...DEFAULT_INFERENCE_PARAMS,
-          ...(currentSampling ?? {}),
           stream: true,
           abortSignal: signal,
         }),
     }),
-    staleTime: Infinity,
+    staleTime: 0,
     gcTime: 0,
   });
 }
