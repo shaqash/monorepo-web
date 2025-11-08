@@ -2,12 +2,27 @@ import './app.css';
 import { useWllama, WllamaProvider } from './utils/wllama.context';
 import { Input } from './components/Input/Input';
 import { usePWA } from './utils/usePWA';
+import { QueryClient } from '@tanstack/react-query';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
+import { createIDBPersister } from './utils/idbPersister';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      gcTime: Infinity,
+    },
+  },
+})
+
+const persister = createIDBPersister();
 
 export function App() {
   return (
-    <WllamaProvider>
-      <Main />
-    </WllamaProvider>
+    <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
+      <WllamaProvider>
+        <Main />
+      </WllamaProvider>
+    </PersistQueryClientProvider>
   )
 }
 

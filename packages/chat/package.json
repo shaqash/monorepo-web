@@ -10,12 +10,17 @@
   },
   "dependencies": {
     "@preact/signals": "^2.3.2",
+    "@tanstack/query-async-storage-persister": "^5.90.9",
+    "@tanstack/react-query": "^5.90.7",
+    "@tanstack/react-query-persist-client": "^5.90.9",
     "@wllama/wllama": "^2.3.6",
+    "idb-keyval": "^6.2.2",
     "preact": "^10.27.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
     "@preact/preset-vite": "^2.10.2",
+    "@tanstack/eslint-plugin-query": "^5.91.2",
     "@types/node": "^24.6.0",
     "@vite-pwa/assets-generator": "^1.0.2",
     "eslint": "^9.39.0",

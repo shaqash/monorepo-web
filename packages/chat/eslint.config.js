@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import globals from "globals";
 import tseslint, { parser } from "typescript-eslint";
+import tanstackQuery from '@tanstack/eslint-plugin-query';
 import preact from "eslint-config-preact";
 import { defineConfig } from "eslint/config";
 
@@ -24,4 +25,5 @@ export default defineConfig([
       },
     },
   },
+  tanstackQuery,
 ]);
