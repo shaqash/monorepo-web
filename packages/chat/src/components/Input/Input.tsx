@@ -1,5 +1,5 @@
 import './Input.css';
-import { useRef, type FC, useEffect } from "preact/compat";
+import { useRef, type FC, useEffect } from 'preact/compat';
 import { useMessages } from '../../utils/useMessages';
 import { useChatCompletion } from '../../utils/useChatCompletion';
 

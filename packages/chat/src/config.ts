@@ -1,6 +1,10 @@
-import type { ChatCompletionOptions, LoadModelConfig, SamplingConfig } from "@wllama/wllama";
-import multiThreadWllamaWasmUrl from "@wllama/wllama/esm/multi-thread/wllama.wasm?url";
-import singleThreadWllamaWasmUrl from "@wllama/wllama/esm/single-thread/wllama.wasm?url";
+import type {
+  ChatCompletionOptions,
+  LoadModelConfig,
+  SamplingConfig,
+} from '@wllama/wllama';
+import multiThreadWllamaWasmUrl from '@wllama/wllama/esm/multi-thread/wllama.wasm?url';
+import singleThreadWllamaWasmUrl from '@wllama/wllama/esm/single-thread/wllama.wasm?url';
 
 export const CONFIG_PATHS = {
   'single-thread/wllama.wasm': singleThreadWllamaWasmUrl,
@@ -50,7 +54,7 @@ export const MODELS: Record<string, ModelParams> = {
     modelConfig: {
       n_ctx: 128000,
     },
-  }
+  },
 };
 
 export type Model = keyof typeof MODELS;

@@ -1,8 +1,8 @@
-import { useEffect, useRef, type FC } from "preact/compat";
-import { useMessages } from "../../utils/useMessages";
-import { useWllama } from "../../utils/wllama.context";
+import { useEffect, useRef, type FC } from 'preact/compat';
+import { useMessages } from '../../utils/useMessages';
+import { useWllama } from '../../utils/wllama.context';
 import './Messages.css';
-import { useChatCompletion } from "../../utils/useChatCompletion";
+import { useChatCompletion } from '../../utils/useChatCompletion';
 
 export const Messages: FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -28,9 +28,7 @@ export const Messages: FC = () => {
         <div key={index} class={`message message-${message.role}`}>
           <div class="message-content">
             {message.role === 'assistant' && (
-              <div class="title-small">
-                {currentModelDisplayName}
-              </div>
+              <div class="title-small">{currentModelDisplayName}</div>
             )}
             {message.content}
           </div>
@@ -38,7 +36,7 @@ export const Messages: FC = () => {
       ))}
       {isPending && (
         <div class="typing-indicator">
-          <div >
+          <div>
             <span />
             <span />
             <span />
@@ -47,5 +45,5 @@ export const Messages: FC = () => {
       )}
       <div ref={messagesEndRef} />
     </div>
-  )
-}
+  );
+};

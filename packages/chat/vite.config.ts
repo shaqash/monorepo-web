@@ -1,27 +1,36 @@
-import { defineConfig } from 'vite'
-import preact from '@preact/preset-vite'
-import { VitePWA } from 'vite-plugin-pwa'
+import { defineConfig } from 'vite';
+import preact from '@preact/preset-vite';
+import { VitePWA } from 'vite-plugin-pwa';
+
+const base = process.env.NODE_ENV !== 'production' ? '/' : '/monorepo-web/';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV !== 'production' ? '/' : '/monorepo-web/',
+  base,
   plugins: [
     preact(),
     {
-      name: 'configure-response-headers', configureServer: (server) => {
+      name: 'configure-response-headers',
+      configureServer: (server) => {
         server.middlewares.use((_req, res, next) => {
-          res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
-          res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+          res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+          res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
           next();
-        })
-      }
+        });
+      },
     },
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
         enabled: process.env.SW_DEV === 'true',
       },
-      includeAssets: ['favicon.ico', 'apple-touch-icon-180x180.png', 'vite.svg', 'screenshot-narrow.png', 'screenshot-wide.png'],
+      includeAssets: [
+        'favicon.ico',
+        'apple-touch-icon-180x180.png',
+        'vite.svg',
+        'screenshot-narrow.png',
+        'screenshot-wide.png',
+      ],
       manifest: {
         name: 'Chat',
         short_name: 'Chat',
@@ -30,8 +39,8 @@ export default defineConfig({
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
-        scope: '/',
-        start_url: '/',
+        scope: base,
+        start_url: base,
         categories: ['productivity', 'utilities'],
         icons: [
           {
@@ -74,7 +83,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,wasm}'],
-      }
+      },
     }),
   ],
-})
+});

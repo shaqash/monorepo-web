@@ -1,5 +1,5 @@
 import './Chat.css';
-import { type FC } from "preact/compat";
+import { type FC } from 'preact/compat';
 import { Messages } from '../Messages/Messages';
 import { Input } from '../Input/Input';
 

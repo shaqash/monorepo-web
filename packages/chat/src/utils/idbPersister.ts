@@ -1,8 +1,8 @@
-import { get, set, del } from 'idb-keyval'
+import { get, set, del } from 'idb-keyval';
 import {
   type PersistedClient,
   type Persister,
-} from '@tanstack/react-query-persist-client'
+} from '@tanstack/react-query-persist-client';
 
 /**
  * Creates an Indexed DB persister
@@ -19,5 +19,5 @@ export function createIDBPersister(idbValidKey: IDBValidKey = 'reactQuery') {
     removeClient: async () => {
       await del(idbValidKey);
     },
-  } satisfies Persister
+  } satisfies Persister;
 }

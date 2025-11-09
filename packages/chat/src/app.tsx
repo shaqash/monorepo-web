@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
       gcTime: Infinity,
     },
   },
-})
+});
 
 const persister = createIDBPersister();
 
@@ -26,12 +26,13 @@ export function App() {
       persistOptions={{ persister }}
       onError={() => {
         console.error('Unable to cache');
-      }}>
+      }}
+    >
       <WllamaProvider>
         <Main />
       </WllamaProvider>
     </PersistQueryClientProvider>
-  )
+  );
 }
 
 export function Main() {
@@ -40,9 +41,12 @@ export function Main() {
   return (
     <>
       <ModelDownloadBar />
-      <NewContentNotif needRefresh={needRefresh} updateServiceWorker={updateServiceWorker} />
+      <NewContentNotif
+        needRefresh={needRefresh}
+        updateServiceWorker={updateServiceWorker}
+      />
       <OfflineNotif offlineReady={offlineReady} />
       <Chat />
     </>
-  )
+  );
 }

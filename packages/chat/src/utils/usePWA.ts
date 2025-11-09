@@ -1,7 +1,11 @@
 import { useRegisterSW } from 'virtual:pwa-register/preact';
 
 export function usePWA() {
-  const { needRefresh: [needRefresh, setNeedRefresh], offlineReady: [offlineReady, setOfflineReady], updateServiceWorker } = useRegisterSW({
+  const {
+    needRefresh: [needRefresh, setNeedRefresh],
+    offlineReady: [offlineReady, setOfflineReady],
+    updateServiceWorker,
+  } = useRegisterSW({
     onRegisteredSW(_swUrl, registration) {
       if (registration) {
         console.log('SW Registered:', registration);
@@ -26,5 +30,5 @@ export function usePWA() {
     setNeedRefresh,
     setOfflineReady,
     updateServiceWorker,
-  }
+  };
 }
