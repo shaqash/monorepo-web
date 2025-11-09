@@ -12,9 +12,9 @@ export const Messages: FC = () => {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages.value.length]);
+  }, [messages.length]);
 
-  if (!messages.value.length) {
+  if (!messages.length) {
     return (
       <div class="flex-middle">
         <h1>{currentModelDisplayName}</h1>
@@ -24,7 +24,7 @@ export const Messages: FC = () => {
 
   return (
     <div class="flex-col overflow-y g3 p4">
-      {messages.value.map((message, index) => (
+      {messages.map((message, index) => (
         <div key={index} class={`message message-${message.role}`}>
           <div class="message-content">
             {message.role === 'assistant' && (

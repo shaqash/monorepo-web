@@ -1,18 +1,18 @@
-import './Input.css';
-import { useRef, type FC, useEffect } from 'preact/compat';
-import { useMessages } from '../../utils/useMessages';
+import { useEffect, useRef, type FC } from 'preact/compat';
 import { useChatCompletion } from '../../utils/useChatCompletion';
+import './Input.css';
+import { useMessages } from '../../utils/useMessages';
 
 export const Input: FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { isLoading, data } = useChatCompletion();
   const { pushAssistant, pushUser } = useMessages();
-  const { data, isLoading } = useChatCompletion();
 
   useEffect(() => {
     if (data) {
       pushAssistant(data);
     }
-  }, [data]);
+  }, [data, pushAssistant]);
 
   const handleSubmit = async () => {
     const inputValue = inputRef.current?.value.trim();
