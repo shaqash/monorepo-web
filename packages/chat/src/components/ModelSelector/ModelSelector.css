@@ -1,0 +1,27 @@
+.chat-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.model-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.model-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.model-select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--bg-button);
+  color: var(--text-normal);
+  border: 1px solid var(--border-muted);
+  font-size: 14px;
+}

@@ -1,6 +1,7 @@
 .chat-container {
   display: grid;
-  grid-template-rows: 1fr auto;
+  /* topbar, messages, input/footer */
+  grid-template-rows: auto 1fr auto;
   height: 100%;
   background-color: var(--bg-chat);
   position: relative;
